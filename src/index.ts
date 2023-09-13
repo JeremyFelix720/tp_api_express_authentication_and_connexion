@@ -15,38 +15,6 @@ const sequelize = new Sequelize({
   storage: "./db.sqlite",
 })
 
-const bddName = sequelize.define("bddName", {
-    property1: {
-        type: DataTypes.STRING,
-    },
-    status: {
-        type: DataTypes.BOOLEAN,
-    },
-}, {
-  timestamps: false,
-})
-
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log('La synchronisation a réussi.');
-    bddName.create({
-      property1: "value1",
-      property2: "value2",
-    })
-    .then((bddRegistration) => {
-      console.log("bddRegistration", bddRegistration)
-      bddName.findAll().then((bddRegistrations) => {
-        console.log("bddRegistrations", bddRegistrations)
-      })
-    })
-  })
-  .catch(error => {
-    console.error('Erreur de synchronisation:', error);
-  });
-
-
-
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
