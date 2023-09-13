@@ -1,0 +1,27 @@
+{
+  "name": "brief_marmiton_backend",
+  "version": "1.0.0",
+  "description": "Brief Marmiton côté serveur",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"tsc --watch\" \"nodemon dist/index.js\"",
+    "start": "tsc && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremyFelix720/brief_marmiton_backend.git"
+  },
+  "author": "Jérémy FELIX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeremyFelix720/brief_marmiton_backend/issues"
+  },
+  "homepage": "https://github.com/JeremyFelix720/brief_marmiton_backend#readme",
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "concurrently": "^8.2.1",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2"
+  }
+}
