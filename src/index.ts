@@ -100,6 +100,13 @@ app.get("/api/free-games/", async (req, res) => {
   res.json(savedFreeGames);
 })
 
+// Récupérer un jeu gratuit
+app.get("/api/free-games/:id", async (req, res) => {
+  const freeGameId = req.params.id;
+  const savedFreeGame = await FreeGameTable.findByPk(freeGameId);
+  res.json(savedFreeGame);
+})
+
 
 /*
 // Pour faire le lien entre le code précédent et le fichier "bd.sqlite" ?

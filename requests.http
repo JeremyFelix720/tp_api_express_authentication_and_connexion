@@ -40,3 +40,8 @@ content-type: application/json
 // Récupérer tous les jeux gratuits :
 GET http://localhost:3030/api/free-games/
 content-type: application/json
+
+###
+// Récupérer un jeu gratuit
+GET http://localhost:3030/api/free-games/2
+content-type: application/json
