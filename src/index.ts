@@ -74,24 +74,20 @@ app.post("/api/auth/local/register", async (req, res) => {
 })
 */
 
+// JEUX GRATUITS
+
 // Ajouter un jeu gratuit
 app.post("/api/free-games/", async (req, res) => {
   const freeGameName = req.body.name;
   const freeGameDescription = req.body.description;
   const freeGameImage = req.body.image;
 
-  const myNewFreeGame = await FreeGameTable.create({
+  const newFreeGame = await FreeGameTable.create({
     name: freeGameName as string,
     description: freeGameDescription as string,
     image: freeGameImage as string,
   })
-
-  console.log(myNewFreeGame);
-  res.status(200).json(myNewFreeGame)
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  res.status(200).json(newFreeGame)
 })
 
 // Récupérer tous les jeux gratuits
@@ -113,15 +109,15 @@ app.put("/api/free-games/:id", async (req, res) => {
   const freeGameName = req.body.data.name;
   const freeGameDescription = req.body.data.description;
   const freeGameImage = req.body.data.image;
-  const myFreeGameModified = {
+  const freeGameModified = {
     name: freeGameName,
     description: freeGameDescription,
     image: freeGameImage
   };
-  await FreeGameTable.update(myFreeGameModified, {where:
+  await FreeGameTable.update(freeGameModified, {where:
       {id: freeGameId}
     });
-  res.status(200).json(myFreeGameModified);
+  res.status(200).json(freeGameModified);
 })
 
 // Supprimer un jeu gratuit
@@ -145,6 +141,86 @@ app.delete("/api/free-games/:id", async (req, res) => {
     );
   }
 })
+
+
+// JEUX PAYANTS
+
+// Ajouter un jeu payant
+app.post("/api/official-games/", async (req, res) => {
+  const officialGameName = req.body.name;
+  const officialGameDescription = req.body.description;
+  const officialGameImage = req.body.image;
+  const officialGamePrice = req.body.price;
+
+  const newOfficialGame = await OfficialGameTable.create({
+    name: officialGameName as string,
+    description: officialGameDescription as string,
+    image: officialGameImage as string,
+    price: officialGamePrice as number,
+  })
+  res.status(200).json(newOfficialGame)
+})
+
+// Récupérer tous les jeux payants
+app.get("/api/official-games/", async (req, res) => {
+  const savedOfficialGames = await OfficialGameTable.findAll();
+  res.status(200).json(savedOfficialGames);
+})
+
+// Récupérer un jeu payant
+app.get("/api/official-games/:id", async (req, res) => {
+  const officialGameId = req.params.id;
+  const savedOfficialGame = await OfficialGameTable.findByPk(officialGameId);
+  res.status(200).json(savedOfficialGame);
+})
+
+// Modifier un jeu payant
+app.put("/api/official-games/:id", async (req, res) => {
+  const officialGameId = req.params.id;
+  const officialGameName = req.body.data.name;
+  const officialGameDescription = req.body.data.description;
+  const officialGameImage = req.body.data.image;
+  const officialGamePrice = req.body.data.price;
+
+  const officialGameModified = {
+    name: officialGameName,
+    description: officialGameDescription,
+    image: officialGameImage,
+    price: officialGamePrice,
+  };
+  await OfficialGameTable.update(officialGameModified, {where:
+      {id: officialGameId}
+    });
+  res.status(200).json(officialGameModified);
+})
+
+// Supprimer un jeu payant
+app.delete("/api/official-games/:id", async (req, res) => {
+  const officialGameId = req.params.id;
+  const numberOfRegistrationDeleted = await OfficialGameTable.destroy({where:
+    { id: officialGameId }
+  });
+
+  if(numberOfRegistrationDeleted === 0) {
+    res.status(400).json(
+      {
+        message: "Aucun enregistrement n'a été supprimé."
+      }
+    );
+  } else {
+    res.status(200).json(
+      {
+        message: "Enregistrement bien supprimé."
+      }
+    );
+  }
+})
+
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
 
 
 

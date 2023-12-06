@@ -5,7 +5,7 @@ GET http://localhost:1337/
 GET http://localhost:1337/toto/
 
 
-// PARTIE JEUX GRATUITS
+// JEUX GRATUITS
 
 ###
 // Créer un jeu gratuit :
@@ -50,7 +50,7 @@ content-type: application/json
 
 ###
 // Modifier un jeu gratuit
-PUT http://localhost:1337/api/free-games/2
+PUT http://localhost:1337/api/free-games/3
 content-type: application/json
 
 {
@@ -59,6 +59,65 @@ content-type: application/json
   }
 }
 
+
 ###
 // Supprimer un jeu gratuit
 DELETE http://localhost:1337/api/free-games/1
+
+
+// JEUX PAYANTS
+
+###
+// Créer un jeu payant :
+POST http://localhost:1337/api/official-games/
+content-type: application/json
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+
+{
+  "name": "Minecraft",
+  "description": "Le joueur sera immergé dans un monde en trois dimensions, de type “bac à sable” (ou “sandbox”), c’est-à-dire qu’il pourra interagir avec le monde, en cassant ou en plaçant des blocs. Dans le mode survie vous devrez récolter des ressources pour survivre face aux squelettes, zombies et autres monstres de Minecraft, ou bien construire dans un monde sans limite généré aléatoirement. Le but étant de tuer l’Enderdragon, un dragon qui se cache dans une autre dimension. Vous pouvez jouer seul ou en multijoueur très facilement. Dans le jeu, vous pouvez également jouer en mode “Créatif” spécialement dédié à la construction d’à peu près tout ce que vous voulez. De ce fait, vous pouvez y créer vos propres objectifs ou bien partager vos créations. Vous battre avec vos amis, ou bien vous allier face aux monstres ! Minecraft n’a aucune limite et c’est ce qui en fait sa beauté.",
+  "image": "https://i.pinimg.com/736x/81/61/32/816132e3f5cf75f6ddd44b5f6536cdac.jpg",
+  "price": 22.09
+}
+
+###
+POST http://localhost:1337/api/official-games/
+content-type: application/json
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+
+{
+  "name": "Les Sims 4",
+  "description": "Les Sims est une simulation de vie proposant de gérer la vie des sims — les habitants de la série Sim City — en leur donnant des directives. Une partie ne se termine jamais car même s'il n'y a plus de sims vivants, le joueur est libre d'en créer de nouveau.",
+  "image": "https://2.bp.blogspot.com/-Uh2ioMCTKho/VCFgdwaJR9I/AAAAAAAABOM/PeYJA57xbro/s1600/ts4_google_plus_cover_2120x1192.jpg",
+  "price": 7.66
+}
+
+###
+// Récupérer tous les jeux payants :
+GET http://localhost:1337/api/official-games/
+content-type: application/json
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+
+###
+// Récupérer un jeu payant
+GET http://localhost:1337/api/official-games/3
+content-type: application/json
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+
+###
+// Modifier un jeu payant
+PUT http://localhost:1337/api/official-games/3
+content-type: application/json
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+
+{
+  "data": {
+    "name": "Les Sims 3"
+  }
+}
+
+###
+// Supprimer un jeu payant
+DELETE http://localhost:1337/api/official-games/1
+//content-type: application/json
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
