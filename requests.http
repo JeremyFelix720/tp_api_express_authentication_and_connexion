@@ -35,3 +35,8 @@ content-type: application/json
   "description": "Le but du jeu est de cumuler le plus de points en formant des mots entrecroisés sur une grille de 15×15 cases. Les lettres possèdent des valeurs différentes et les cases, selon leur couleur peuvent multiplier la valeur des lettres (cases bleues) ou des mots (cases rouges).",
   "image": "https://www.greatestcoloringbook.com/wp-content/uploads/2020/05/jouer-au-scrabble-en-ligne-les-meilleurs-sites-et-applis-dedans-jeux-enfant-gratuit-en-ligne.jpeg"
 }
+
+###
+// Récupérer tous les jeux gratuits :
+GET http://localhost:3030/api/free-games/
+content-type: application/json

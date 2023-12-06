@@ -94,6 +94,13 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+// Récupérer tous les jeux gratuits
+app.get("/api/free-games/", async (req, res) => {
+  const savedFreeGames = await FreeGameTable.findAll();
+  res.json(savedFreeGames);
+})
+
+
 /*
 // Pour faire le lien entre le code précédent et le fichier "bd.sqlite" ?
 sequelize
