@@ -52,5 +52,7 @@ PUT http://localhost:1337/api/free-games/2
 content-type: application/json
 
 {
-  "name": "Candy Crush Saga"
+  "data": {
+    "name": "Candy Crush Saga"
+  }
 }

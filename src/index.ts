@@ -109,13 +109,28 @@ app.get("/api/free-games/:id", async (req, res) => {
 
 // Modifier un jeu gratuit
 app.put("/api/free-games/:id", async (req, res) => {
-  const id = req.params.id;
-  const name = req.body.name;
-  const description = req.body.description;
-  const image = req.body.image;
-  const myFreeGame = {name, description, image}
-  FreeGameTable.update(myFreeGame, {where:{id}});
-  res.status(200).send(JSON.stringify(myFreeGame));
+  const freeGameId = req.params.id;
+  const freeGameName = req.body.data.name;
+  const freeGameDescription = req.body.data.description;
+  const freeGameImage = req.body.data.image;
+  const myFreeGameModified = {
+    name: freeGameName,
+    description: freeGameDescription,
+    image: freeGameImage
+  };
+  await FreeGameTable.update(myFreeGameModified, {where:
+      {id: freeGameId}
+    });
+  res.status(200).json(myFreeGameModified);
+
+})
+
+
+app.delete("/api/free-games/:id", async (req, res) => {
+  const freeGameId = req.params.id;
+  const savedFreeGame = await FreeGameTable.findByPk(freeGameId);
+  savedFreeGame?.destroy;
+  res.json(savedFreeGame);
 })
 
 
