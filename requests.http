@@ -1,5 +1,37 @@
 GET http://localhost:3032/
 ###
 GET http://localhost:3032/toto/
-###
 
+
+// PARTIE JEUX GRATUITS
+
+###
+// Créer un jeu gratuit :
+POST http://localhost:3030/api/free-games/
+content-type: application/json
+
+{
+  "name": "Candy Crush",
+  "description": "Le but du jeu est de faire écraser des bonbons colorés en associant des combinaisons d'au moins trois bonbons5, afin de remplir l'objectif du niveau et de marquer un maximum de points. Les objectifs peuvent être les suivants : Gagner un nombre de points (niveau 1) ; Enlever toute la gélatine (niveau 6) ; Faire tomber les ingrédients (niveau 11) ; Gagner un nombre de points en un temps limité (niveau 20) ; Récupérer toutes les commandes (niveau 126).",
+  "image": "https://www.greatestcoloringbook.com/wp-content/uploads/2020/05/jeux-de-match-3-plus-de-276-jeux-de-match-3-gratuits-sur-pour-jeux-des-differences-gratuit.jpg"
+}
+
+###
+POST http://localhost:3030/api/free-games/
+content-type: application/json
+
+{
+  "name": "Bubble Shooter",
+  "description": "Le but du jeu est de vider le canon, symbolisé par une flèche violette, en tirant sur des balles identiques. Les points varient en fonction du nombre de balles que vous faites éclater en 1 tir. Les erreurs sont sanctionnées par des points de pénalité et au bout de 5 points, la rangée descend d'1 étage. Plus vous avez éliminé de couleurs et plus le nombre d'étage rajouté est important. Le but principal est d'éliminer toutes les bubbles.",
+  "image": "https://image.winudf.com/v2/image1/Y29tLnRpZ2Vyc3R1ZGlvYmcuZ2FtZXMuYnViYmxlc2hvb3Rlcl9zY3JlZW5fMF8xNTQ5MjExMjQ1XzAzMQ/screen-0.jpg?h=710&fakeurl=1&type=.jpg"
+}
+
+###
+POST http://localhost:3030/api/free-games/
+content-type: application/json
+
+{
+  "name": "Scrabble",
+  "description": "Le but du jeu est de cumuler le plus de points en formant des mots entrecroisés sur une grille de 15×15 cases. Les lettres possèdent des valeurs différentes et les cases, selon leur couleur peuvent multiplier la valeur des lettres (cases bleues) ou des mots (cases rouges).",
+  "image": "https://www.greatestcoloringbook.com/wp-content/uploads/2020/05/jouer-au-scrabble-en-ligne-les-meilleurs-sites-et-applis-dedans-jeux-enfant-gratuit-en-ligne.jpeg"
+}
