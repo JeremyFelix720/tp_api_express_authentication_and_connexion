@@ -48,11 +48,9 @@ content-type: application/json
 
 ###
 // Modifier un jeu gratuit
-PUT http://localhost:1337/api/free-games/1
+PUT http://localhost:1337/api/free-games/2
 content-type: application/json
 
 {
-  "data": {
-    "name": "Candy Crush Saga"
-  }
+  "name": "Candy Crush Saga"
 }

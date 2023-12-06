@@ -107,6 +107,17 @@ app.get("/api/free-games/:id", async (req, res) => {
   res.json(savedFreeGame);
 })
 
+// Modifier un jeu gratuit
+app.put("/api/free-games/:id", async (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const description = req.body.description;
+  const image = req.body.image;
+  const myFreeGame = {name, description, image}
+  FreeGameTable.update(myFreeGame, {where:{id}});
+  res.status(200).send(JSON.stringify(myFreeGame));
+})
+
 
 /*
 // Pour faire le lien entre le code précédent et le fichier "bd.sqlite" ?
