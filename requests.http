@@ -1,3 +1,5 @@
+// Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
+
 GET http://localhost:1337/
 ###
 GET http://localhost:1337/toto/
@@ -56,3 +58,7 @@ content-type: application/json
     "name": "Candy Crush Saga"
   }
 }
+
+###
+// Supprimer un jeu gratuit
+DELETE http://localhost:1337/api/free-games/1

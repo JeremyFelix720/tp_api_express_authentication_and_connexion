@@ -60,11 +60,11 @@ const OfficialGameTable = sequelize.define("OfficialGameTable", {
 sequelize.sync()
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.status(200).send('Hello World!')
 })
 
 app.get('/toto/', (req, res) => {
-    res.send('Toto')
+  res.status(200).send('Toto')
 })
 
 /*
@@ -87,7 +87,7 @@ app.post("/api/free-games/", async (req, res) => {
   })
 
   console.log(myNewFreeGame);
-  res.json(myNewFreeGame)
+  res.status(200).json(myNewFreeGame)
 })
 
 app.listen(port, () => {
@@ -97,14 +97,14 @@ app.listen(port, () => {
 // Récupérer tous les jeux gratuits
 app.get("/api/free-games/", async (req, res) => {
   const savedFreeGames = await FreeGameTable.findAll();
-  res.json(savedFreeGames);
+  res.status(200).json(savedFreeGames);
 })
 
 // Récupérer un jeu gratuit
 app.get("/api/free-games/:id", async (req, res) => {
   const freeGameId = req.params.id;
   const savedFreeGame = await FreeGameTable.findByPk(freeGameId);
-  res.json(savedFreeGame);
+  res.status(200).json(savedFreeGame);
 })
 
 // Modifier un jeu gratuit
@@ -122,16 +122,30 @@ app.put("/api/free-games/:id", async (req, res) => {
       {id: freeGameId}
     });
   res.status(200).json(myFreeGameModified);
-
 })
 
-
+// Supprimer un jeu gratuit
 app.delete("/api/free-games/:id", async (req, res) => {
   const freeGameId = req.params.id;
-  const savedFreeGame = await FreeGameTable.findByPk(freeGameId);
-  savedFreeGame?.destroy;
-  res.json(savedFreeGame);
+  const numberOfRegistrationDeleted = await FreeGameTable.destroy({where:
+    { id: freeGameId }
+  });
+
+  if(numberOfRegistrationDeleted === 0) {
+    res.status(400).json(
+      {
+        message: "Aucun enregistrement n'a été supprimé."
+      }
+    );
+  } else {
+    res.status(200).json(
+      {
+        message: "Enregistrement bien supprimé."
+      }
+    );
+  }
 })
+
 
 
 /*
