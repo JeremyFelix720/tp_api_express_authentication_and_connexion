@@ -1,13 +1,13 @@
-GET http://localhost:3032/
+GET http://localhost:1337/
 ###
-GET http://localhost:3032/toto/
+GET http://localhost:1337/toto/
 
 
 // PARTIE JEUX GRATUITS
 
 ###
 // Créer un jeu gratuit :
-POST http://localhost:3030/api/free-games/
+POST http://localhost:1337/api/free-games/
 content-type: application/json
 
 {
@@ -17,7 +17,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:3030/api/free-games/
+POST http://localhost:1337/api/free-games/
 content-type: application/json
 
 {
@@ -27,7 +27,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:3030/api/free-games/
+POST http://localhost:1337/api/free-games/
 content-type: application/json
 
 {
@@ -38,10 +38,21 @@ content-type: application/json
 
 ###
 // Récupérer tous les jeux gratuits :
-GET http://localhost:3030/api/free-games/
+GET http://localhost:1337/api/free-games/
 content-type: application/json
 
 ###
 // Récupérer un jeu gratuit
-GET http://localhost:3030/api/free-games/2
+GET http://localhost:1337/api/free-games/2
 content-type: application/json
+
+###
+// Modifier un jeu gratuit
+PUT http://localhost:1337/api/free-games/1
+content-type: application/json
+
+{
+  "data": {
+    "name": "Candy Crush Saga"
+  }
+}
