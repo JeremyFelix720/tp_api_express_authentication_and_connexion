@@ -1,24 +1,20 @@
-console.log('Hello world');
-
-import { DataTypes, Sequelize } from "sequelize"
-import bodyParser from "body-parser"
-import express from "express"
 import "dotenv/config"
+import express from "express"
 import cors from "cors"
+import bodyParser from "body-parser"
+import { DataTypes, Sequelize } from "sequelize"
+
+// import models
+
+// import routes
+
+
 
 const app = express()
 const port = parseInt(process.env.PORT as string)
 
 app.use(cors());
 app.use(bodyParser.json())
-
-/*
-interface IMyBodyRequest {
-  name: string,
-  description: string,
-  duration: string,
-}
-*/
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
@@ -56,23 +52,22 @@ const OfficialGameTable = sequelize.define("OfficialGameTable", {
   timestamps: false,
 })
 
-
-sequelize.sync()
-
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!')
+const UserTable = sequelize.define("UserTable", {
+  pseudo: {
+    type: DataTypes.STRING,
+  },
+  email: {
+    type: DataTypes.STRING,
+  },
+  password: {
+    type: DataTypes.STRING,
+  },
+}, {
+  timestamps: false,
 })
 
-app.get('/toto/', (req, res) => {
-  res.status(200).send('Toto')
-})
+sequelize.sync( {force: true} )
 
-/*
-// Ajouter un utilisateur VOIR CA A LA FIN
-app.post("/api/auth/local/register", async (req, res) => {
-  res.send()
-})
-*/
 
 // JEUX GRATUITS
 
@@ -217,11 +212,73 @@ app.delete("/api/official-games/:id", async (req, res) => {
 })
 
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+// UTILISATEURS
+
+// AUTH
+
+import { Router } from "express";
+// import { TokenBlackList, User } from "..";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+// import { DecodeToken, checkToken } from "../middlewares/checkToken";
+
+
+// Ajout d'un utilisateur sous certaines conditions
+app.post("/api/auth/local/register", async (req, res) => {
+  //const userId = req.body.id;
+  const userPseudo = req.body.pseudo;
+  const userEmail = req.body.email;
+  const userPassword = req.body.password;
+
+  // Vérification si un utilisateur existant dans la BDD a le même email que celui que l'on souhaite rajouté.
+  const sameUserResearched = await UserTable.findOne( {where: {email: userEmail} || {pseudo: userPseudo} })
+
+  if(sameUserResearched === null){ // si aucun utilisateur similaire n'a été trouvé précédement.
+
+    // Le mdp "userPassword" est hashé ici :
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(userPassword, saltRounds);
+    const myUser = {
+      // id: userId,
+      pseudo: userPseudo,
+      email: userEmail,
+      password: hashedPassword
+    };
+
+    const newUser = await UserTable.create(myUser)
+
+    delete newUser.dataValues.password  // mdp pas supprimé de la BDD mais seulement de l'objet renvoyé à l'utilisateur (qui n'en a pas besoin).
+
+    res.status(200).json(
+      {
+        message: "L'utilisateur a bien été ajouté.",
+        // ...myUser, // destructuration de l'objet myUser qui correxpond à aux lignes suivantes :
+        // id: userId,
+        pseudo: userPseudo,
+        email: userEmail
+        // password: hashedPassword
+      }
+    )
+  } else {
+      res.status(400).json(
+        {
+          message: "Il y a déjà un utilisateur ayant la même adresse email."
+        }
+      )
+    }
 })
 
 
+// USER
+
+
+
+
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 
 /*

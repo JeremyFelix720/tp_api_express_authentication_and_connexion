@@ -1,5 +1,9 @@
 # La même mais avec Express
 
+Correction de l'API dans le backend :
+https://github.com/ThomasLaforge/api-model
+
+
 ## Objectif
 
 Créer une API avec Express qui fonctionne de manière proche de l'API Strapi.

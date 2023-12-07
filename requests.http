@@ -121,3 +121,28 @@ content-type: application/json
 DELETE http://localhost:1337/api/official-games/1
 //content-type: application/json
 // Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+
+
+// UTILISATEURS
+
+###
+// Rajouter un utilisateur (automatiquement connecté ???) :
+POST http://localhost:1337/api/auth/local/register
+content-type: application/json
+
+{
+  "pseudo": "Toto",
+  "email": "toto@gmail.com",
+  "password": "asdq37dqqsd7"
+}
+
+###
+// Rajouter un utilisateur (automatiquement connecté ???) :
+POST http://localhost:1337/api/auth/local/register
+content-type: application/json
+
+{
+  "pseudo": "Tata",
+  "email": "tata@gmail.com",
+  "password": "asdfqslwjazqsd7"
+}
