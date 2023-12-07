@@ -20,3 +20,13 @@ content-type: application/json
   "email": "tata@gmail.com",
   "password": "asdfqslwjazqsd7"
 }
+
+###
+// Authentifier un utilisateur (le jwt s'affiche ici) :
+POST http://localhost:1337/api/auth/local
+content-type: application/json
+
+{
+  "identifier": "toto@gmail.com",
+  "password": "asdq37dqqsd7"
+}

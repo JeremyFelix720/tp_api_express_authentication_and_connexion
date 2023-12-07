@@ -15,14 +15,14 @@ Améliorer certains points de l'API Strapi.
 
 ## Comment ajouter une authentification ?
 
-### Créer un model utilisateur
+### Créer un model utilisateur [OK]
 
 Créez un model `User` avec les champs suivants :
 - id
 - email
 - password
 
-### Créer une route de registration
+### Créer une route de registration [OK]
 
 Au moment de l'enregistrement d'un utilisateur, vous devez vérifier que l'email n'est pas déjà utilisé.
 Si l'email est déjà utilisé, vous devez renvoyer une erreur 400 avec un message d'erreur.

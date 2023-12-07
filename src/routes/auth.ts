@@ -18,10 +18,9 @@ authRouter.post("/local/register", async (req, res) => {
   const userPassword = req.body.password;
 
   // Vérification si un utilisateur existant dans la BDD a le même email que celui que l'on souhaite rajouté.
-  const sameUserResearched = await User.findOne( {where: {email: userEmail} || {pseudo: userPseudo} })
+  const sameUserEmail = await User.findOne( {where: {email: userEmail} || {pseudo: userPseudo} })
 
-  if(sameUserResearched === null){ // si aucun utilisateur similaire n'a été trouvé précédement.
-
+  if(sameUserEmail === null){ // si aucun utilisateur similaire n'a été trouvé précédement.
     // Le mdp "userPassword" est hashé ici :
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(userPassword, saltRounds);
@@ -53,4 +52,36 @@ authRouter.post("/local/register", async (req, res) => {
         }
       )
     }
+})
+
+
+// Connexion d'un utilisateur sous certaines conditions
+authRouter.post("/local/", async (req, res) => {
+  const userEmail = req.body.identifier;
+  const userPassword = req.body.password;
+
+  const sameUserEmail = await User.findOne( {where: {email: userEmail} })
+
+  if(sameUserEmail) {
+
+    const isPasswordCorrect = await bcrypt.compare(userPassword, sameUserEmail.dataValues.password);
+
+    if (isPasswordCorrect) {
+      delete sameUserEmail.dataValues.password;
+      const token = jwt.sign(sameUserEmail.dataValues, process.env.JWT_SECRET!);
+      res.status(200).json({
+        message: "L'utilisateur a bien été connecté.",
+        jwt: token,
+      });
+    }
+    else {
+        res.status(400).send("Email or Password is incorrect");
+    }
+  } else {
+    res.status(400).json(
+      {
+        message: "Il n'existe aucun compte ayant ce couple email / mot de passe.",
+      }
+    )
+  }
 })
