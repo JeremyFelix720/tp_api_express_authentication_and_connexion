@@ -1,0 +1,22 @@
+// Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
+
+###
+// Rajouter un utilisateur (automatiquement connecté ???) :
+POST http://localhost:1337/api/auth/local/register
+content-type: application/json
+
+{
+  "pseudo": "Toto",
+  "email": "toto@gmail.com",
+  "password": "asdq37dqqsd7"
+}
+
+### Rajouter un utilisateur (automatiquement connecté ???) :
+POST http://localhost:1337/api/auth/local/register
+content-type: application/json
+
+{
+  "pseudo": "Tata",
+  "email": "tata@gmail.com",
+  "password": "asdfqslwjazqsd7"
+}
