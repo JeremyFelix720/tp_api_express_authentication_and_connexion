@@ -86,7 +86,7 @@ authRouter.post("/local", async (req, res) => {
 })
 
 // Déconnexion d'un utilisateur
-authRouter.post("/logout", /*checkToken,*/ async (req, res) => {
+authRouter.post("/logout", checkToken, async (req, res) => {
   const decoded = jwt.decode(req.body.token!) as DecodeToken
   const user = await User.findOne({ where: { id: decoded.id } });
   if (user) {

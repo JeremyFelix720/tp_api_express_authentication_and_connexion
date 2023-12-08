@@ -1,6 +1,9 @@
 // Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
 
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwNTIzMjB9.N2QVwpV7B6N7i2BVpxGN7s_TFHE50cxORL8mPo6-N2o
+
+
 ### Rajouter un utilisateur (automatiquement connecté) :
 
 POST http://localhost:1337/api/auth/local/register
@@ -38,4 +41,4 @@ content-type: application/json
 ### Deconnecter un utilisateur :
 
 POST http://localhost:1337/api/auth/logout
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwNTEwNjl9.mBqmEaBi26egmQRyX5_SrshPOec1SL1G4ZvVRZLy4d8
+Authorization: Bearer {{token}}

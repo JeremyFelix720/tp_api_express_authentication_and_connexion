@@ -2,7 +2,7 @@
 
 // Attention : il faut récupérer le JWT de l'utilisateur connecté pour l'intégrer dans le header "Authorization" à chaque fois que ce dernier est réinitialisé ou bien qu'il se reconnecte.
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwNTEwNjl9.mBqmEaBi26egmQRyX5_SrshPOec1SL1G4ZvVRZLy4d8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwNTIzMjB9.N2QVwpV7B6N7i2BVpxGN7s_TFHE50cxORL8mPo6-N2o
 
 
 ### Créer un jeu payant :
@@ -10,6 +10,7 @@
 POST http://localhost:1337/api/official-games/
 content-type: application/json
 Authorization: Bearer {{token}}
+
 {
   "name": "Minecraft",
   "description": "Le joueur sera immergé dans un monde en trois dimensions, de type “bac à sable” (ou “sandbox”), c’est-à-dire qu’il pourra interagir avec le monde, en cassant ou en plaçant des blocs. Dans le mode survie vous devrez récolter des ressources pour survivre face aux squelettes, zombies et autres monstres de Minecraft, ou bien construire dans un monde sans limite généré aléatoirement. Le but étant de tuer l’Enderdragon, un dragon qui se cache dans une autre dimension. Vous pouvez jouer seul ou en multijoueur très facilement. Dans le jeu, vous pouvez également jouer en mode “Créatif” spécialement dédié à la construction d’à peu près tout ce que vous voulez. De ce fait, vous pouvez y créer vos propres objectifs ou bien partager vos créations. Vous battre avec vos amis, ou bien vous allier face aux monstres ! Minecraft n’a aucune limite et c’est ce qui en fait sa beauté.",
@@ -24,7 +25,7 @@ content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Les Sims 5",
+  "name": "Les Sims 4",
   "description": "Les Sims est une simulation de vie proposant de gérer la vie des sims — les habitants de la série Sim City — en leur donnant des directives. Une partie ne se termine jamais car même s'il n'y a plus de sims vivants, le joueur est libre d'en créer de nouveau.",
   "image": "https://2.bp.blogspot.com/-Uh2ioMCTKho/VCFgdwaJR9I/AAAAAAAABOM/PeYJA57xbro/s1600/ts4_google_plus_cover_2120x1192.jpg",
   "price": 7.66
@@ -36,11 +37,13 @@ GET http://localhost:1337/api/official-games/
 content-type: application/json
 Authorization: Bearer {{token}}
 
+
 ### Récupérer un jeu payant :
 
 GET http://localhost:1337/api/official-games/2
 content-type: application/json
 Authorization: Bearer {{token}}
+
 
 ### Modifier un jeu payant :
 
