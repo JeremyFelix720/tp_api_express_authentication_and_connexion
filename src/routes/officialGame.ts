@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { OfficialGame } from "../index";
-import { middleware } from "../middlewares/checkToken"
+import { checkToken } from "../middlewares/checkToken"
 
 export const officialGamesRouter = Router();
 
-// L'ajout du "middleware" dans chacune des requêtes permet de limiter l'accès des jeux officiels aux utilisateurs connectés.
+// L'ajout du "Middleware" dans chacune des requêtes permet de limiter l'accès des jeux officiels aux utilisateurs connectés.
 
 // Ajouter un jeu payant
-officialGamesRouter.post("/", middleware, async (req, res) => {
+officialGamesRouter.post("/", checkToken, async (req, res) => {
   const officialGameName = req.body.name;
   const officialGameDescription = req.body.description;
   const officialGameImage = req.body.image;
@@ -23,20 +23,20 @@ officialGamesRouter.post("/", middleware, async (req, res) => {
 })
 
 // Récupérer tous les jeux payants
-officialGamesRouter.get("/", middleware, async (req, res) => {
+officialGamesRouter.get("/", checkToken, async (req, res) => {
   const savedOfficialGames = await OfficialGame.findAll();
   res.status(200).json(savedOfficialGames);
 })
 
 // Récupérer un jeu payant
-officialGamesRouter.get("/:id", middleware, async (req, res) => {
+officialGamesRouter.get("/:id", checkToken, async (req, res) => {
   const officialGameId = req.params.id;
   const savedOfficialGame = await OfficialGame.findByPk(officialGameId);
   res.status(200).json(savedOfficialGame);
 })
 
 // Modifier un jeu payant
-officialGamesRouter.put("/:id", middleware, async (req, res) => {
+officialGamesRouter.put("/:id", checkToken, async (req, res) => {
   const officialGameId = req.params.id;
   const officialGameName = req.body.data.name;
   const officialGameDescription = req.body.data.description;
@@ -56,7 +56,7 @@ officialGamesRouter.put("/:id", middleware, async (req, res) => {
 })
 
 // Supprimer un jeu payant
-officialGamesRouter.delete("/:id", middleware, async (req, res) => {
+officialGamesRouter.delete("/:id", checkToken, async (req, res) => {
   const officialGameId = req.params.id;
   const numberOfRegistrationDeleted = await OfficialGame.destroy({where:
     { id: officialGameId }

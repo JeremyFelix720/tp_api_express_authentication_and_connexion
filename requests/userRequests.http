@@ -1,6 +1,7 @@
 // Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
 
-### Rajouter un utilisateur :
+
+### Rajouter un utilisateur (automatiquement connecté) :
 
 POST http://localhost:1337/api/auth/local/register
 content-type: application/json
@@ -11,7 +12,7 @@ content-type: application/json
   "password": "asdq37dqqsd7"
 }
 
-### Rajouter un utilisateur :
+### Rajouter un utilisateur (automatiquement connecté) :
 
 POST http://localhost:1337/api/auth/local/register
 content-type: application/json
@@ -22,7 +23,7 @@ content-type: application/json
   "password": "asdfqslwjazqsd7"
 }
 
-### Authentifier un utilisateur (le jwt s'affiche ici) :
+### Authentifier un utilisateur (le Token s'affiche ici) :
 
 POST http://localhost:1337/api/auth/local
 content-type: application/json
@@ -31,3 +32,10 @@ content-type: application/json
   "identifier": "toto@gmail.com",
   "password": "asdq37dqqsd7"
 }
+
+// Copier-coler le Token généré dans la variable dans le fichier "officialGamesRequests.http" !
+
+### Deconnecter un utilisateur :
+
+POST http://localhost:1337/api/auth/logout
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwNTEwNjl9.mBqmEaBi26egmQRyX5_SrshPOec1SL1G4ZvVRZLy4d8

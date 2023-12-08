@@ -7,7 +7,7 @@ import { DataTypes, Sequelize } from "sequelize"
 import { OfficialGameModel } from "./models/OfficialGame";
 import { FreeGameModel } from "./models/FreeGame";
 import { UserModel } from "./models/User";
-// import { TokenBlackListModel } from "./model/TokenBlackList";
+import { TokenBlackListModel } from "./models/TokenBlackList";
 
 import { freeGamesRouter } from "./routes/freeGame";
 import { officialGamesRouter } from "./routes/officialGame";
@@ -23,9 +23,12 @@ const sequelize = new Sequelize({
 export const OfficialGame = OfficialGameModel(sequelize);
 export const FreeGame = FreeGameModel(sequelize);
 export const User = UserModel(sequelize);
-// export const TokenBlackList = TokenBlackListModel(sequelize);
+export const TokenBlackList = TokenBlackListModel(sequelize);
 
-sequelize.sync( {force: true} )
+
+// sequelize.sync( {force: true} )  // Réinitialise les données de la BDD à chaque fois que l'on execute le programme avec la commande "npm run dev" ou "npm run start".
+
+sequelize.sync()  // Conserve les données de la BDD à chaque fois que l'on execute le programme avec la commande "npm run dev" ou "npm run start".
 
 
 const app = express()
@@ -46,4 +49,3 @@ app.use("/api", apiRouter);
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
 })
-

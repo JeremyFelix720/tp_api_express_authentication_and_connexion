@@ -1,36 +1,41 @@
+// Token = la suite de carractères compliqués
+// JWT = l'outil qui permet d'exploiter le token
+
+import "dotenv/config";
 import jwt from "jsonwebtoken";
+import {Request, Response, NextFunction } from 'express';
+import { TokenBlackList } from "../index";
 
-export const middleware = (req: any, res: any, next: any) => {
 
-  const fullToken = req.headers.authorization;  // fullToken = "Bearer + jwt"
+export interface DecodeToken {
+  id: number;
+  username: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
 
+
+export async function checkToken(req: Request, res: Response, next: NextFunction) {
+  const fullToken = req.headers.authorization;  // fullToken = "Bearer + JWT" (dans le header "Authorization" des requêtes)
   if (!fullToken) {
-    res.status(401).send("Token non fourni");
-  }
-  else {
-    const token = fullToken.replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!)
-
-    if(decoded){
-      req.token = token
-      next();  // Validation du middleware
-      console.log("Le JWT est correct.")
-      /*
-      res.status(200).json(
-        {
-          message: "Le JWT est correct."
-        }
-      );
-      */
+    res.status(401).send("Le Token n'a pas été fourni.");
+  } else {
+    const [typeToken, token] = fullToken.split(" ");
+    // Le type "Bearer" indique uniquement que le Token qui se situe après l'espace a bien le bon format.
+    if(typeToken !== "Bearer"){
+      res.status(401).send("Le type de Token est incorrect.");
     } else {
-      console.log("Le JWT est incorrect.")
-      /*
-      res.status(400).json(
-        {
-          message: "Le JWT est incorrect."
-        }
-      );
-      */
+      const isBlacklisted = await TokenBlackList.findOne({ where: { token } });
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!)
+      // JWT_SECRET est une clé spécifique à notre serveur, ce qui permet de vérifier qu'aucun autre serveur ne souhaite accèder à notre BDD.
+      console.log(decoded);
+      if (decoded && !isBlacklisted) {  // si le Token est : valide + bien fourni par notre serveur && qu'il ne n'est pas un Token interdit (qui a été généré avant la deconnexion de l'utilisateur)
+        req.body.token = token;
+        next();  // Validation du middleware
+      } else {
+        res.status(401).send("Le Token est incorrect.");
+      }
     }
   }
 }

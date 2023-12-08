@@ -38,7 +38,7 @@ const saltRounds = 10;
 const hash = await bcrypt.hash(myPlaintextPassword, saltRounds);
 ```
 
-### Créer une route de login
+### Créer une route de login [OK]
 
 Au moment de la connexion d'un utilisateur, vous devez vérifier que le couple email/password est correct.
 Si le couple email/password est incorrect, vous devez renvoyer une erreur 400 avec un message d'erreur.
@@ -60,7 +60,7 @@ import jwt from 'jsonwebtoken';
 jwt.sign({ data: 'foobar'}, 'secret', { expiresIn: '1h' });
 ```
 
-### Créer un middleware d'authentification
+### Créer un middleware d'authentification [OK]
 
 Créez un middleware qui vérifie que le token JWT est présent dans le header `Authorization` et qu'il est valide.
 Si le token n'est pas présent ou qu'il n'est pas valide, vous devez renvoyer une erreur 401 avec un message d'erreur.
@@ -92,7 +92,7 @@ app.get('/foo', middleware, (req, res) => {
 });
 ```
 
-### Utilisation du middleware d'authentification
+### Utilisation du middleware d'authentification [OK]
 
 Ajoutez le middleware d'authentification sur les routes privées.
 

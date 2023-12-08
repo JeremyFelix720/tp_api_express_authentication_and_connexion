@@ -1,16 +1,14 @@
 import { Router } from "express";
-// import { TokenBlackList, User } from "..";
+import { TokenBlackList, User } from "../index";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-// import { DecodeToken, checkToken } from "../middlewares/checkToken";
-
-import { User } from "../index";
+import { DecodeToken, checkToken } from "../middlewares/checkToken";
 
 export const authRouter = Router();
 
 
-// Ajout d'un utilisateur sous certaines conditions
+// Ajout d'un utilisateur
 authRouter.post("/local/register", async (req, res) => {
   //const userId = req.body.id;
   const userPseudo = req.body.pseudo;
@@ -54,9 +52,8 @@ authRouter.post("/local/register", async (req, res) => {
     }
 })
 
-
-// Connexion d'un utilisateur sous certaines conditions
-authRouter.post("/local/", async (req, res) => {
+// Connexion d'un utilisateur
+authRouter.post("/local", async (req, res) => {
   const userEmail = req.body.identifier;
   const userPassword = req.body.password;
 
@@ -85,5 +82,18 @@ authRouter.post("/local/", async (req, res) => {
         message: "Il n'existe aucun compte ayant ce couple email / mot de passe.",
       }
     )
+  }
+})
+
+// Déconnexion d'un utilisateur
+authRouter.post("/logout", /*checkToken,*/ async (req, res) => {
+  const decoded = jwt.decode(req.body.token!) as DecodeToken
+  const user = await User.findOne({ where: { id: decoded.id } });
+  if (user) {
+      await TokenBlackList.create({ token: req.body.token });
+      res.send("Logged out");
+  }
+  else {
+      res.status(404).send("User not found");
   }
 })
