@@ -1,10 +1,13 @@
 // Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
 
-###
-// Créer un jeu payant :
+// Attention : il faut récupérer le JWT de l'utilisateur connecté pour l'intégrer dans le header "Authorization" à chaque fois que ce dernier est réinitialisé ou bien qu'il se reconnecte.
+
+
+### Créer un jeu payant :
+
 POST http://localhost:1337/api/official-games/
 content-type: application/json
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwMzYyODd9.J01hdVFBrqM5CdntZofbqmHeqyFh0VIMfi2EuipAWnE
 
 {
   "name": "Minecraft",
@@ -13,10 +16,11 @@ content-type: application/json
   "price": 22.09
 }
 
-###
+### Créer un jeu payant :
+
 POST http://localhost:1337/api/official-games/
 content-type: application/json
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwMzYyODd9.J01hdVFBrqM5CdntZofbqmHeqyFh0VIMfi2EuipAWnE
 
 {
   "name": "Les Sims 4",
@@ -25,23 +29,23 @@ content-type: application/json
   "price": 7.66
 }
 
-###
-// Récupérer tous les jeux payants :
+### Récupérer tous les jeux payants :
+
 GET http://localhost:1337/api/official-games/
 content-type: application/json
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwMzYyODd9.J01hdVFBrqM5CdntZofbqmHeqyFh0VIMfi2EuipAWnE
 
-###
-// Récupérer un jeu payant
+### Récupérer un jeu payant :
+
 GET http://localhost:1337/api/official-games/2
 content-type: application/json
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwMzYyODd9.J01hdVFBrqM5CdntZofbqmHeqyFh0VIMfi2EuipAWnE
 
-###
-// Modifier un jeu payant
+### Modifier un jeu payant :
+
 PUT http://localhost:1337/api/official-games/2
 content-type: application/json
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwMzYyODd9.J01hdVFBrqM5CdntZofbqmHeqyFh0VIMfi2EuipAWnE
 
 {
   "data": {
@@ -49,8 +53,8 @@ content-type: application/json
   }
 }
 
-###
-// Supprimer un jeu payant
-DELETE http://localhost:1337/api/official-games/3
+### Supprimer un jeu payant :
+
+DELETE http://localhost:1337/api/official-games/2
 //content-type: application/json
-// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAxNzkwMjA5LCJleHAiOjE3MDQzODIyMDl9.w5N8wvNofDx20jk1YtpLjoui3jibUfJogH-eCpArYts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicHNldWRvIjoiVG90byIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDIwMzYyODd9.J01hdVFBrqM5CdntZofbqmHeqyFh0VIMfi2EuipAWnE

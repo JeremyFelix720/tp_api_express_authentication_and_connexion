@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 
+
 export const OfficialGameModel = (sequelize: Sequelize) => {
   return sequelize.define("OfficialGameTable", {
     name: {

@@ -1,7 +1,7 @@
 // Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
 
-###
-// Créer un jeu gratuit :
+### Créer un jeu gratuit :
+
 POST http://localhost:1337/api/free-games/
 content-type: application/json
 
@@ -11,7 +11,8 @@ content-type: application/json
   "image": "https://www.greatestcoloringbook.com/wp-content/uploads/2020/05/jeux-de-match-3-plus-de-276-jeux-de-match-3-gratuits-sur-pour-jeux-des-differences-gratuit.jpg"
 }
 
-###
+### Créer un jeu gratuit :
+
 POST http://localhost:1337/api/free-games/
 content-type: application/json
 
@@ -21,7 +22,8 @@ content-type: application/json
   "image": "https://image.winudf.com/v2/image1/Y29tLnRpZ2Vyc3R1ZGlvYmcuZ2FtZXMuYnViYmxlc2hvb3Rlcl9zY3JlZW5fMF8xNTQ5MjExMjQ1XzAzMQ/screen-0.jpg?h=710&fakeurl=1&type=.jpg"
 }
 
-###
+### Créer un jeu gratuit :
+
 POST http://localhost:1337/api/free-games/
 content-type: application/json
 
@@ -31,18 +33,18 @@ content-type: application/json
   "image": "https://www.greatestcoloringbook.com/wp-content/uploads/2020/05/jouer-au-scrabble-en-ligne-les-meilleurs-sites-et-applis-dedans-jeux-enfant-gratuit-en-ligne.jpeg"
 }
 
-###
-// Récupérer tous les jeux gratuits :
+### Récupérer tous les jeux gratuits :
+
 GET http://localhost:1337/api/free-games/
 content-type: application/json
 
-###
-// Récupérer un jeu gratuit
+### Récupérer un jeu gratuit :
+
 GET http://localhost:1337/api/free-games/2
 content-type: application/json
 
-###
-// Modifier un jeu gratuit
+### Modifier un jeu gratuit :
+
 PUT http://localhost:1337/api/free-games/1
 content-type: application/json
 
@@ -52,6 +54,6 @@ content-type: application/json
   }
 }
 
-###
-// Supprimer un jeu gratuit
+### Supprimer un jeu gratuit :
+
 DELETE http://localhost:1337/api/free-games/4

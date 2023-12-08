@@ -1,7 +1,7 @@
 // Structure des routes pour manipuler les données en Strapi : https://docs.strapi.io/dev-docs/api/rest
 
-###
-// Rajouter un utilisateur (automatiquement connecté ???) :
+### Rajouter un utilisateur :
+
 POST http://localhost:1337/api/auth/local/register
 content-type: application/json
 
@@ -11,7 +11,8 @@ content-type: application/json
   "password": "asdq37dqqsd7"
 }
 
-### Rajouter un utilisateur (automatiquement connecté ???) :
+### Rajouter un utilisateur :
+
 POST http://localhost:1337/api/auth/local/register
 content-type: application/json
 
@@ -21,8 +22,8 @@ content-type: application/json
   "password": "asdfqslwjazqsd7"
 }
 
-###
-// Authentifier un utilisateur (le jwt s'affiche ici) :
+### Authentifier un utilisateur (le jwt s'affiche ici) :
+
 POST http://localhost:1337/api/auth/local
 content-type: application/json
 

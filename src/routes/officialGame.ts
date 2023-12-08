@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { OfficialGame } from "../index";
+import { middleware } from "../middlewares/checkToken"
 
 export const officialGamesRouter = Router();
 
+// L'ajout du "middleware" dans chacune des requêtes permet de limiter l'accès des jeux officiels aux utilisateurs connectés.
 
 // Ajouter un jeu payant
-officialGamesRouter.post("/", async (req, res) => {
+officialGamesRouter.post("/", middleware, async (req, res) => {
   const officialGameName = req.body.name;
   const officialGameDescription = req.body.description;
   const officialGameImage = req.body.image;
@@ -21,20 +23,20 @@ officialGamesRouter.post("/", async (req, res) => {
 })
 
 // Récupérer tous les jeux payants
-officialGamesRouter.get("/", async (req, res) => {
+officialGamesRouter.get("/", middleware, async (req, res) => {
   const savedOfficialGames = await OfficialGame.findAll();
   res.status(200).json(savedOfficialGames);
 })
 
 // Récupérer un jeu payant
-officialGamesRouter.get("/:id", async (req, res) => {
+officialGamesRouter.get("/:id", middleware, async (req, res) => {
   const officialGameId = req.params.id;
   const savedOfficialGame = await OfficialGame.findByPk(officialGameId);
   res.status(200).json(savedOfficialGame);
 })
 
 // Modifier un jeu payant
-officialGamesRouter.put("/:id", async (req, res) => {
+officialGamesRouter.put("/:id", middleware, async (req, res) => {
   const officialGameId = req.params.id;
   const officialGameName = req.body.data.name;
   const officialGameDescription = req.body.data.description;
@@ -54,7 +56,7 @@ officialGamesRouter.put("/:id", async (req, res) => {
 })
 
 // Supprimer un jeu payant
-officialGamesRouter.delete("/:id", async (req, res) => {
+officialGamesRouter.delete("/:id", middleware, async (req, res) => {
   const officialGameId = req.params.id;
   const numberOfRegistrationDeleted = await OfficialGame.destroy({where:
     { id: officialGameId }
